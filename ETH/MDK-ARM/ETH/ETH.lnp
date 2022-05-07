@@ -106,7 +106,7 @@
 "eth\mld6.o"
 "eth\nd6.o"
 "eth\mqtt.o"
---library_type=microlib --strict --scatter "ETH\ETH.sct"
+--strict --scatter "ETH\ETH.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "ETH.map" -o ETH\ETH.axf
