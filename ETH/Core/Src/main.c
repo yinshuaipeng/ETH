@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tcpclinet.h"
+#include "tcpserver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,6 +94,7 @@ int main(void)
 	HAL_Delay(50);
 	printf("初始化成功\r\n");
 	TCP_Client_Init();
+	TCP_Echo_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

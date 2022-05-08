@@ -72,3 +72,4 @@ eth\main.o: ../Middlewares/Third_Party/LwIP/src/include/lwip/timeouts.h
 eth\main.o: ../LWIP/Target/ethernetif.h
 eth\main.o: ../Core/Inc/usart.h
 eth\main.o: ../Core/Inc/gpio.h
+eth\main.o: ../Core/Inc/tcpserver.h

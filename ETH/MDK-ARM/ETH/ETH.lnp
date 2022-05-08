@@ -6,6 +6,7 @@
 "eth\usart.o"
 "eth\stm32f4xx_it.o"
 "eth\stm32f4xx_hal_msp.o"
+"eth\tcpserver.o"
 "eth\ethernetif.o"
 "eth\lwip.o"
 "eth\stm32f4xx_hal_eth.o"
