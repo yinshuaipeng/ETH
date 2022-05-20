@@ -31,3 +31,5 @@ i2c slaves\i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
 i2c slaves\i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 i2c slaves\i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 i2c slaves\i2c.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+i2c slaves\i2c.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+i2c slaves\i2c.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

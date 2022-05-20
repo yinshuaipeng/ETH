@@ -31,10 +31,18 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern I2C_HandleTypeDef hi2c2;
+
 
 /* USER CODE BEGIN Private defines */
-
+extern I2C_HandleTypeDef hi2c2;
+typedef struct 
+{
+	bool rx_flag;
+	bool tx_flag;
+	uint8_t rx_buff[10];
+	uint8_t tx_buff[10];	
+	
+}I2C_DATA_HANDLE;
 /* USER CODE END Private defines */
 
 void MX_I2C2_Init(void);

@@ -179,7 +179,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>礄?4娦	?籹</Name>
+          <Name>ん?$蝈	?籹</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -217,12 +217,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>bTransferRequest</ItemText>
+          <ItemText>i2c_data_fream.rx_buff</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>bTransferRequest</ItemText>
+          <ItemText>i2c_data_fream</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -359,7 +359,7 @@
 
   <Group>
     <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

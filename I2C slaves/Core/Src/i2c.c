@@ -21,11 +21,11 @@
 #include "i2c.h"
 
 /* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-extern uint8_t bTransferRequest[10];
-extern uint8_t TX_buff;
+#include "string.h"
 I2C_HandleTypeDef hi2c2;
+extern  I2C_DATA_HANDLE i2c_data_fream;
+/* USER CODE END 0 */
+
 
 /* I2C2 init function */
 void MX_I2C2_Init(void)
@@ -52,8 +52,7 @@ void MX_I2C2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN I2C2_Init 2 */
-	HAL_I2C_Slave_Receive_IT(&hi2c2, (uint8_t*)bTransferRequest, 5);
-	//HAL_I2C_Slave_Transmit_IT(&hi2c2, (uint8_t *)bTransferRequest, 5);
+
   /* USER CODE END I2C2_Init 2 */
 
 }
@@ -123,18 +122,53 @@ void HAL_I2C_MspDeInit(I2C_HandleTypeDef* i2cHandle)
 }
 
 /* USER CODE BEGIN 1 */
-void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)
+
+void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, uint16_t AddrMatchCode)
 {
-		HAL_I2C_Slave_Receive_IT(&hi2c2, (uint8_t*)bTransferRequest, 5);
-}
+    __HAL_I2C_CLEAR_FLAG(hi2c, I2C_FLAG_ADDR);
+ 
+	if(TransferDirection == I2C_DIRECTION_RECEIVE)      //需要发送
+	{
+		if (i2c_data_fream.rx_flag)
+		{
+			memcpy(&i2c_data_fream.tx_buff,&i2c_data_fream.rx_buff,sizeof(i2c_data_fream.rx_buff));
+		}
+		HAL_I2C_Slave_Seq_Transmit_IT(&hi2c2, i2c_data_fream.tx_buff , 5, I2C_FIRST_FRAME);
+		i2c_data_fream.tx_flag = true;
+	}
+	else if(TransferDirection == I2C_DIRECTION_TRANSMIT)//需要接收
+	{
 
-void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)
+		HAL_I2C_Slave_Seq_Receive_IT(&hi2c2, i2c_data_fream.rx_buff, 5, I2C_FIRST_AND_NEXT_FRAME);
+		i2c_data_fream.rx_flag= true;
+
+	}
+	else
+	{
+		//非读写地址
+	}
+}
+ 
+void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)  //监听中断回调
 {
 
-	HAL_I2C_Slave_Transmit_IT(&hi2c2, &TX_buff, 1);
+	HAL_I2C_EnableListen_IT(hi2c); // Restart
+}
+ 
+void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部发送完成回调
+{
+
+	HAL_I2C_Slave_Seq_Transmit_IT(&hi2c2, i2c_data_fream.tx_buff , 5, I2C_FIRST_FRAME);  //模拟eeprom被读一个字的行为
+}
+void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c)  //全部接收完成回调
+{ 
+	//接收字节长度
+	HAL_I2C_Slave_Seq_Receive_IT(&hi2c2, i2c_data_fream.rx_buff, 5, I2C_FIRST_AND_NEXT_FRAME);
+}
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
+{
 
 }
-
 
 
 

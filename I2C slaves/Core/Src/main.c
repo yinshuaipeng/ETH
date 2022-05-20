@@ -56,32 +56,16 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 extern  I2C_HandleTypeDef hi2c2;
+I2C_DATA_HANDLE i2c_data_fream;//I2C RX_TX结构体
 /* USER CODE END 0 */
 
 
-#define I2C_ADDRESS        0x3E  /* Real 7 bits slave address value in Datasheet is: b0011111
-                                    mean in uint8_t equivalent at 0x1F and this value can be
-                                    seen in the OAR1 register in bits ADD[1:7] */
 
-#define MASTER_REQ_WRITE   0x34
 
-/* Size of Transmission buffer */
-#define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
-/* Size of Reception buffer */
-#define RXBUFFERSIZE                      TXBUFFERSIZE
+ 
 
-/* Exported macro ------------------------------------------------------------*/
-#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-/* Exported functions ------------------------------------------------------- */
 
-uint8_t aTxBuffer[] = " ****I2C_TwoBoards advanced communication based on IT****  ****I2C_TwoBoards advanced communication based on IT****  ****I2C_TwoBoards advanced communication based on IT**** ";
-
-/* Buffer used for reception */
-uint8_t aRxBuffer[RXBUFFERSIZE];
-uint16_t hTxNumData = 0, hRxNumData = 0;
-uint8_t bTransferRequest[10] = {1,2,3,4,5,6,7,8,9,0};
-uint8_t TX_buff = 12;
-/**
+/**23
   * @brief  The application entry point.
   * @retval int
   */
@@ -112,7 +96,10 @@ int main(void)
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_I2C_EnableListen_IT(&hi2c2);
+	HAL_I2C_Slave_Seq_Receive_IT(&hi2c2, i2c_data_fream.rx_buff, 5, I2C_LAST_FRAME);  //开启从机中断接收
   /* USER CODE END 2 */
+
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -122,9 +109,8 @@ int main(void)
 
 			/* Initialize number of data variables */
 
-
-  
     /* USER CODE BEGIN 3 */
+		 HAL_Delay(4000);
   }
   /* USER CODE END 3 */
 }
@@ -203,7 +189,7 @@ void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     ex: //printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
