@@ -1,0 +1,10 @@
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/src/memheap.c
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rthw.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtthread.h
+rt thread\memheap.o: ../RT-Thread/rtconfig.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtdebug.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtdef.h
+rt thread\memheap.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtservice.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/finsh/finsh_api.h
+rt thread\memheap.o: ../Middlewares/Third_Party/RealThread_RTOS/finsh/finsh_config.h
