@@ -50,9 +50,10 @@
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-static struct rt_thread led1_thread;
-static rt_uint8_t rt_led1_thread_static[1024];
+//static struct rt_thread led1_thread;
+//static rt_uint8_t rt_led1_thread_static[1024];
 static void led1_thread_entry(void *parameter);
+static rt_thread_t led1_thread = RT_NULL;
 
 /* USER CODE BEGIN PFP */
 
@@ -72,8 +73,16 @@ int main(void)
 
 	MX_GPIO_Init();
 	MX_USART1_UART_Init();
-	rt_thread_init(&led1_thread,"led1",led1_thread_entry,RT_NULL,&rt_led1_thread_static[0],sizeof(rt_led1_thread_static),3,20);
-	rt_thread_startup(&led1_thread);
+	//rt_thread_init(&led1_thread,"led1",led1_thread_entry,RT_NULL,&rt_led1_thread_static[0],sizeof(rt_led1_thread_static),3,20);
+	led1_thread = rt_thread_create("led1",led1_thread_entry,RT_NULL,512,3,20);
+	if (led1_thread != RT_NULL)
+	{
+		rt_thread_startup(led1_thread);
+	}
+	else{
+		return -1;
+	}
+
   /* USER CODE END 3 */
 }
 static void led1_thread_entry(void *parameter)
@@ -82,6 +91,7 @@ static void led1_thread_entry(void *parameter)
 	{
 		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_3);
 		HAL_GPIO_TogglePin(GPIOE,GPIO_PIN_4);
+		HAL_GPIO_TogglePin(GPIOG,GPIO_PIN_9);
 		rt_thread_delay(500);
 	}
 }
