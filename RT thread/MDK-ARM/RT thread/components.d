@@ -1,4 +1,4 @@
-rt thread\components.o: ../Middlewares/Third_Party/RealThread_RTOS/src/components.c
+rt thread\components.o: ..\Middlewares\Third_Party\RealThread_RTOS\src\components.c
 rt thread\components.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rthw.h
 rt thread\components.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtthread.h
 rt thread\components.o: ../RT-Thread/rtconfig.h

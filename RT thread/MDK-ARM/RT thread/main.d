@@ -41,3 +41,4 @@ rt thread\main.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 rt thread\main.o: ../Middlewares/Third_Party/RealThread_RTOS/include/rtservice.h
 rt thread\main.o: ../Middlewares/Third_Party/RealThread_RTOS/finsh/finsh_api.h
 rt thread\main.o: ../Middlewares/Third_Party/RealThread_RTOS/finsh/finsh_config.h
+rt thread\main.o: ../Core/Inc/RT_Thread_Init.h
