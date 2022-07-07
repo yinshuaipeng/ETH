@@ -93,7 +93,26 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
+void TIM_delay_us(uint16_t nus)
+{
+	uint16_t delay_temp = 65535 - nus - 10;
+	HAL_TIM_Base_Start(&htim7);
+	__HAL_TIM_SET_COUNTER(&htim7,delay_temp);
+	while(delay_temp < 0xffff - 10)
+	{
+		delay_temp = __HAL_TIM_GET_COUNTER(&htim7);
+	}
+	HAL_TIM_Base_Stop(&htim7);
+}
 
+void TIM_delay_ms(uint16_t nms)
+{
+	uint16_t i= 0;
+	for( i= 0;i<nms;i++)
+	{
+		TIM_delay_us(1000);
+	}
+}
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

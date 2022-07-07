@@ -38,3 +38,5 @@ w5500\tcp_demo.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 w5500\tcp_demo.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 w5500\tcp_demo.o: ..\Ethernet\W_5500\w5500.h
 w5500\tcp_demo.o: ..\Ethernet\W_5500\socket.h
+w5500\tcp_demo.o: ../Core/Inc/tim.h
+w5500\tcp_demo.o: ../Core/Inc/main.h

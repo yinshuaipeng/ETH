@@ -15,7 +15,7 @@
 #include "W5500_conf.h"
 #include "w5500.h"
 #include "socket.h"
-
+#include "tim.h"
 uint8 buff[2048];				                              	         /*定义一个2KB的缓存*/
 
 /**
@@ -63,6 +63,7 @@ void do_tcp_server(void)
 *@param		无
 *@return	无
 */
+uint8_t tx_buff[5];
 void do_tcp_client(void)
 {	
    uint16 len=0;	
@@ -88,14 +89,15 @@ void do_tcp_client(void)
 			len=getSn_RX_RSR(SOCK_TCPC); 								  	         /*定义len为已接收数据的长度*/
 			if(len>0)
 			{
-				recv(SOCK_TCPC,buff,len); 							   		         /*接收来自Server的数据*/
+				recv(SOCK_TCPC,tx_buff,len); 							   		         /*接收来自Server的数据*/
 				buff[len]=0x00;  											                 /*添加字符串结束符*/
 				printf("%s\r\n",buff);
-				send(SOCK_TCPC,buff,len);								     	         /*向Server发送数据*/
+				//send(SOCK_TCPC,tx_buff,2);
+				//send(SOCK_TCPC,&tx_buff,1);								     	         /*向Server发送数据*/	
 			}	
+							send(SOCK_TCPC,tx_buff,2);
 //      printf("SOCK_ESTABLISHED\n");      
-		  break;
-			
+		  break;			
 		case SOCK_CLOSE_WAIT: 											    	         /*socket处于等待关闭状态*/
 			close(SOCK_TCPC);
 //      printf("SOCK_CLOSE_WAIT\n");
