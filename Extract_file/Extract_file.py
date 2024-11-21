@@ -8,7 +8,7 @@ def filterfile():
     file_dir指读的文件目录;save_dir为保存文件的目录
     suffix用于存放打算提取文件的后缀名;
     '''
-
+    #test
     file_dir = os.getcwd()
     print ("当前工作目录 : %s" % os.getcwd())
     save_dir = os.getcwd() + "\Include_files" #在当前根目录下新建一个文件夹用于存放提取出来的文件
